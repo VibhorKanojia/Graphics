@@ -103,7 +103,7 @@ int main(int argc, char** argv)
   glLightfv(GL_LIGHT4, GL_POSITION, light4_pos);
   glLightfv(GL_LIGHT4, GL_DIFFUSE, diffuse4);
   glLightfv(GL_LIGHT4, GL_SPECULAR, specular4);
-  glEnable(GL_LIGHTING);
+  //glEnable(GL_LIGHTING);
   //glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
   //glEnable(GL_LIGHT2);

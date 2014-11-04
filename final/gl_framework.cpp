@@ -37,6 +37,7 @@ float pre_move_x = 0;
 float pre_move_y = 0;
 float pre_move_z = 0;
 int camera_number = 0;
+int rotate_ball = 0;
 
 
 namespace csX75
@@ -296,58 +297,58 @@ namespace csX75
     
     if (key == GLFW_KEY_T && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        rotate_ul_angle = rotate_ul_angle - 2*5;
-        rotate_ur_angle = rotate_ur_angle + 2*5;
-        ur_x = ur_x - 0.01;
-        ul_x = ul_x + 0.01;
-        rotate_lr_angle = rotate_lr_angle - 90;
-        rotate_ll_angle = rotate_ll_angle + 90;
-        rhand_y = rhand_y + 26*0.01;
-        lhand_y = lhand_y + 26*0.01;
-        rotate_ur_hand = rotate_ur_hand + 9*5;
-        rotate_lr_hand = rotate_lr_hand - 26*5;
-        rotate_ul_hand = rotate_ul_hand - 9*5;
-        rotate_ll_hand = rotate_ll_hand + 26*5;
-        rotate_split = rotate_split - 8*5;
-        translate_blades = translate_blades - 20*0.01;
-        rotate_blades = rotate_blades - 18*5;
-        gun_rotate = gun_rotate - 26*0.01;
-        rotate_stand_bottom = rotate_stand_bottom - 15*5;
-        translate_stand_bottom = translate_stand_bottom - 8*0.01;
-        t_head_y = t_head_y + 23*0.01;
-        t_head_z = t_head_z - 3*0.01;
-        rotate_x = rotate_x + 16*5;
-        rotate_angle = rotate_angle + 12*5;
-        rotate_sides = rotate_sides - 9*5;
-        rotate_tyre = rotate_tyre - 10*5;
-        orient_tyre = orient_tyre - 18*5;
+        rotate_ul_angle = 0;
+        rotate_ur_angle = 0;
+        ur_x = 0;
+        ul_x = 0;
+        rotate_lr_angle = 0;
+        rotate_ll_angle = 0;
+        rhand_y = 0;
+        lhand_y = 0;
+        rotate_ur_hand = 0;
+        rotate_lr_hand = 0;
+        rotate_ul_hand = 0;
+        rotate_ll_hand = 0;
+        rotate_split = 0;
+        translate_blades = 0;
+        rotate_blades = 0;
+        gun_rotate = 0;
+        rotate_stand_bottom = 0;
+        translate_stand_bottom = 0;
+        t_head_y = 0;
+        t_head_z = 0;
+        rotate_x = 0;
+        rotate_angle = 0;
+        rotate_sides = 0;
+        rotate_tyre = 0;
+        orient_tyre = 0;
       }
       else {
-        rotate_ul_angle = rotate_ul_angle + 2*5;
-        rotate_ur_angle = rotate_ur_angle - 2*5;
-        ur_x = ur_x + 0.01;
-        ul_x = ul_x - 0.01;
-        rotate_lr_angle = rotate_lr_angle + 90;
-        rotate_ll_angle = rotate_ll_angle - 90;
-        rhand_y = rhand_y - 26*0.01;
-        lhand_y = lhand_y - 26*0.01;
-        rotate_ur_hand = rotate_ur_hand - 9*5;
-        rotate_lr_hand = rotate_lr_hand + 26*5;
-        rotate_ul_hand = rotate_ul_hand + 9*5;
-        rotate_ll_hand = rotate_ll_hand - 26*5;
-        rotate_split = rotate_split + 8*5;
-        translate_blades = translate_blades + 20*0.01;
-        rotate_blades = rotate_blades + 18*5;
-        gun_rotate = gun_rotate + 26*0.01;
-        rotate_stand_bottom = rotate_stand_bottom + 15*5;
-        translate_stand_bottom = translate_stand_bottom + 8*0.01;
-        t_head_y = t_head_y - 23*0.01;
-        t_head_z = t_head_z + 3*0.01;
-        rotate_x = rotate_x - 16*5;
-        rotate_angle = rotate_angle - 12*5;
-        rotate_sides = rotate_sides + 9*5;
-        rotate_tyre = rotate_tyre + 10*5;
-        orient_tyre = orient_tyre + 18*5;
+        rotate_ul_angle = 2*5;
+        rotate_ur_angle = -2*5;
+        ur_x = 0.01;
+        ul_x = -0.01;
+        rotate_lr_angle = 90;
+        rotate_ll_angle = -90;
+        rhand_y = - 26*0.01;
+        lhand_y = - 26*0.01;
+        rotate_ur_hand =  - 9*5;
+        rotate_lr_hand = 26*5;
+        rotate_ul_hand = 9*5;
+        rotate_ll_hand =  - 26*5;
+        rotate_split =  8*5;
+        translate_blades = 20*0.01;
+        rotate_blades = 18*5;
+        gun_rotate = 26*0.01;
+        rotate_stand_bottom = 15*5;
+        translate_stand_bottom =8*0.01;
+        t_head_y =  - 23*0.01;
+        t_head_z = 3*0.01;
+        rotate_x = - 16*5;
+        rotate_angle =  - 12*5;
+        rotate_sides = 9*5;
+        rotate_tyre = 10*5;
+        orient_tyre = 18*5;
       }
     }
     

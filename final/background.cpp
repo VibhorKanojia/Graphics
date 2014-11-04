@@ -184,7 +184,7 @@ void background::draw_building(void){
     glEnd();
     
     //top
-    glBindTexture(GL_TEXTURE_2D,texture[8]);
+    glBindTexture(GL_TEXTURE_2D,texture[7]);
     glColor4f(0.01,0.55,0.9,1);
 	glBegin(GL_POLYGON);
 	  v1.x = -12.0;
@@ -208,7 +208,7 @@ void background::draw_building(void){
      glClearColor(1,1,1,1);
      glColor4f(1,1,1,1);
     //bottom
-    glBindTexture(GL_TEXTURE_2D,texture[7]);
+    glBindTexture(GL_TEXTURE_2D,texture[8]);
     //glColor4f(0.01,0.55,0.9,1);
 	glBegin(GL_POLYGON);
 	  v1.x = -12.0;

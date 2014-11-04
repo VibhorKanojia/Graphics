@@ -28,6 +28,7 @@ extern float ur_x, ul_x,rhand_y,lhand_y;
 extern float translate_blades,t_head_y,gun_rotate,t_head_z;
 extern float tilt_left, tilt_down;
 extern int movement_flag;
+extern int rotate_ball;
 extern float pre_move_x, pre_move_y, pre_move_z;
 extern int camera_number;
 

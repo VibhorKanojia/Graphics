@@ -616,6 +616,7 @@ void transformer::struct_joint(void)
 void transformer::renderGL(void)
 {
   //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+ rotate_ball = (rotate_ball + 10)%360;  
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  DrawTransformer();
 }
@@ -727,6 +728,7 @@ void transformer::DrawTransformer(){
       
       /*================blades===============*/
       glPushMatrix();
+        glRotatef(rotate_ball,0.0,0.0,1.0);
 				glTranslatef(0.0,0.0,translate_blades);
 				glPushMatrix();
 			    glTranslatef(0.0,0.0,-(conn_z)/2);
