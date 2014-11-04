@@ -6,8 +6,8 @@ LDFLAGS=-L/usr/local/lib
 CPPFLAGS=-I/usr/local/include
 
 BIN=transformer 
-SRCS=main.cpp transformer.cpp image.cpp background.cpp gl_framework.cpp
-INCLUDES=gl_framework.hpp image.hpp transformer.hpp background.hpp
+SRCS=main.cpp transformer.cpp image.cpp background.cpp gl_framework.cpp record_frames.cpp
+INCLUDES=gl_framework.hpp image.hpp transformer.hpp background.hpp record_frames.hpp
 
 all: $(BIN)
 
