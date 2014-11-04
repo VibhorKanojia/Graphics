@@ -1,4 +1,5 @@
 #include "gl_framework.hpp"
+#include "record_frames.hpp"
 
 int rotate_angle = 0;
 int rotate_head = 0;
@@ -94,6 +95,12 @@ namespace csX75
     }
     if (key == GLFW_KEY_4 && action == GLFW_PRESS){
       rotate_x = rotate_x - 5;
+    }
+    
+    if (key == GLFW_KEY_0 && action == GLFW_PRESS){
+      record r;
+      r.update_params();
+      r.record_frame_params();
     }
     
     if (key == GLFW_KEY_5 && action == GLFW_PRESS){
