@@ -616,7 +616,7 @@ void transformer::struct_joint(void)
 void transformer::renderGL(void)
 {
   //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
- rotate_ball = (rotate_ball + 10)%360;  
+ rotate_ball = (rotate_ball - 10)%360;  
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  DrawTransformer();
 }
@@ -658,7 +658,7 @@ void transformer::DrawTransformer(){
 	
 		glPushMatrix();
 			glRotatef(-rotate_x,1.0,0.0,0.0);
-			glCallList(blding);
+			myback.createScene();
 	glPopMatrix();
    /*================torso=================*/
     glPushMatrix();

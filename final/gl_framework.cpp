@@ -72,7 +72,7 @@ namespace csX75
     //!Resize the viewport to fit the window size - draw to entire window
     glViewport(0, 0, width, height);
     double aspect;
-    gluPerspective(120,(double)width/(double)height, 0.1 , 20.0);
+    gluPerspective(120,(double)width/(double)height, 0.001 , 200.0);
    
   }
   
@@ -113,12 +113,10 @@ namespace csX75
     
     if (key == GLFW_KEY_LEFT && action == GLFW_PRESS){
       tilt_left = tilt_left - 5;
-      std::cout<<"tilt_left "<<tilt_left<<std::endl;
     }
     
     if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS){
       tilt_left = tilt_left + 5;
-      std::cout<<"tilt_left "<<tilt_left<<std::endl;
     }
     
     if (key == GLFW_KEY_6 && action == GLFW_PRESS){

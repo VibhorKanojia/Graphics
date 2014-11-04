@@ -10,6 +10,7 @@ public:
 	void load_textures();
 	void draw_building();
 	void draw_ground();
+	void createScene();
 	void struct_ground();
 	void struct_building();
 	void createRoom();

@@ -33,7 +33,7 @@ void background::load_textures() {
     t4.generate();
 
     glGenTextures(1, &texture[5]);
-    Texture t5(texture[5], "Data/lesson6/building.bmp");
+    Texture t5(texture[5], "Data/lesson6/buildingtype1.bmp");
     t5.generate();
 
     glGenTextures(1, &texture[6]);
@@ -48,57 +48,39 @@ void background::load_textures() {
     Texture t8(texture[8], "Data/lesson6/birdview.bmp");
     t8.generate();
 
+    glGenTextures(1, &texture[9]);
+    Texture t9(texture[9], "Data/lesson6/buildingtype1.bmp");
+    t9.generate();
+
+    glGenTextures(1, &texture[10]);
+    Texture t10(texture[10], "Data/lesson6/buildingtype2.bmp");
+    t10.generate();
+
     glDisable(GL_TEXTURE_2D);
 };
 
 
 void background::draw_ground(void){
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D,texture[6]);
-	glBegin(GL_POLYGON);
-		vertex_vec v1,v2,res;
-    v1.x = -2.0;
-    v1.y = 0.0;
-    v1.z = 0.0;
-    v2.x = -2.0;
-    v2.y = -2.0;
-    v2.z = 0.0;
-    res = t.CalcNormal(v1,v2);
-    glNormal3d(res.x,res.y,res.z);
-    glTexCoord2f(0,0);
-		glVertex3f(-1 , -1, -1);
-		glTexCoord2f(1,0);
-		glVertex3f(1 , -1 , -1);
-		glTexCoord2f(1,1);
-		glVertex3f(1, 1, -1);
-		glTexCoord2f(0,1);
-		glVertex3f(-1, 1, -1);
-	glEnd();
-	
-	glBindTexture(GL_TEXTURE_2D,texture[4]);
-	glBegin(GL_POLYGON);
-    v1.x = -2.0;
-    v1.y = 0.0;
-    v1.z = 0.0;
-    v2.x = -2.0;
-    v2.y = 0.0;
-    v2.z = -2.0;
-    res = t.CalcNormal(v1,v2);
-    glNormal3d(res.x,res.y,res.z);
-    glTexCoord2f(0,0);
-		glVertex3f(-1 , 1, -1);
-		glTexCoord2f(1,0);
-		glVertex3f(1 , 1, -1);
-		glTexCoord2f(1,1);
-		glVertex3f(1, 1, 1);
-		glTexCoord2f(0,1);
-		glVertex3f(-1, 1, 1);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
+	 glBindTexture(GL_TEXTURE_2D,texture[2]);
+    //glColor4f(0.01,0.55,0.9,1);
+    glBegin(GL_POLYGON);
+     glTexCoord2f(0,0);
+     glVertex3f(-6,-0.5,-6);
+     glTexCoord2f(7,0);
+     glVertex3f(6,-0.5,-6);
+     glTexCoord2f(7,7);
+     glVertex3f(6,-0.5,6);
+     glTexCoord2f(0,7);
+     glVertex3f(-6,-0.5,6);
+    glEnd();
+     glClearColor(.043,0.62,0.75,1);
+
+     glDisable(GL_TEXTURE_2D);
 }
 
 
-
+/*
 void background::draw_building(void){
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D,texture[5]);
@@ -232,7 +214,74 @@ void background::draw_building(void){
 
      glDisable(GL_TEXTURE_2D);
   }
+*/
 
+
+void background::draw_building(void){ 
+  float s = 0.5;
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture[10]);
+  //glColor4f(0.8,0.8,1.0,1.0);
+  glBegin(GL_POLYGON);
+    glTexCoord2f(0,1);
+    glVertex3f(0.0,s,0.0);
+    glTexCoord2f(0,0);
+    glVertex3f(0.0,0.0,0.0);
+    glTexCoord2f(1,0);
+    glVertex3f(s,0.0,0.0);
+    glTexCoord2f(1,1);
+    glVertex3f(s,s,0.0);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glTexCoord2f(0,1);
+    glVertex3f(s,s,-s);
+    glTexCoord2f(0,0);
+    glVertex3f(s,0.0,-s);
+    glTexCoord2f(1,0);
+    glVertex3f(0.0,0.0,-s);
+    glTexCoord2f(1,1);
+    glVertex3f(0.0,s,-s);
+  glEnd();
+
+
+  glBegin(GL_POLYGON);
+    glTexCoord2f(0,1);
+    glVertex3f(s,s,-s);
+    glTexCoord2f(0,0);
+    glVertex3f(s,0.0,-s);
+    glTexCoord2f(1,0);
+    glVertex3f(s,0,0);
+    glTexCoord2f(1,1);
+    glVertex3f(s,s,0);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glTexCoord2f(0,1);
+    glVertex3f(0,s,-s);
+    glTexCoord2f(0,0);
+    glVertex3f(0,0,-s);
+    glTexCoord2f(1,0);
+    glVertex3f(0.0,0.0,0);
+    glTexCoord2f(1,1);
+    glVertex3f(0.0,s,0);
+  glEnd();
+  
+  glBegin(GL_POLYGON);
+    glVertex3f(0.0,s,0.0);
+    glVertex3f(s,s,0.0);
+    glVertex3f(s,s,-s);
+    glVertex3f(0,s,-s);
+  glEnd();
+
+  glBegin(GL_QUAD_STRIP);
+    glVertex3f(0.0,0.0,0.0);
+    glVertex3f(s,0.0,0.0);
+    glVertex3f(s,0.0,-s);
+    glVertex3f(0.0,0.0,-s);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+}
 
 
 
@@ -252,6 +301,16 @@ void background::struct_building(void){
 void background::createRoom(){
 	
 }
+
+void background::createScene(){
+    glPushMatrix();
+      glCallList(grnd);
+      glTranslatef(0,-0.5,-3);
+      glScalef(2,2,1);
+      glCallList(blding);
+    glPopMatrix();
+}
+
 void background::setCamera(int cam_pos){
 	if (cam_pos  == 1){
 		gluLookAt(0,3,-0.7,0 , 0 , -6 , 0, 1, 0);
