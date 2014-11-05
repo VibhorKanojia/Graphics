@@ -39,7 +39,9 @@ float pre_move_y = 0;
 float pre_move_z = 0;
 int camera_number = 0;
 int rotate_ball = 0;
-
+bool playback = false;
+float start_time = 0.0;
+int frames_recorded = 0;
 
 namespace csX75
 {
@@ -138,6 +140,11 @@ namespace csX75
       camera_number = camera_number + 1;
     }
     
+    if (key == GLFW_KEY_8 && action == GLFW_PRESS){
+      playback = true;
+      start_time = glfwGetTime();
+    }
+
     if (key == GLFW_KEY_A && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
         rotate_ul_angle = rotate_ul_angle - 5;

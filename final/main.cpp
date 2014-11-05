@@ -5,19 +5,6 @@
 #include <vector>
 #include <fstream>
 
-void savePPM(int start_x,int start_y,int w,int h,char *fname)
-{
-        FILE *f=fopen(fname,"wb");
-        if (!f) return;
-        std::vector<unsigned char> out(3*w*h);
-        glPixelStorei(GL_PACK_ALIGNMENT,1); /* byte aligned output */
-        glReadPixels(start_x,start_y,w,h, GL_RGB,GL_UNSIGNED_BYTE,&out[0]);
-        fprintf(f,"P6\n%d %d\n255\n",w,h);
-        for (int y=0;y<h;y++) { /* flip image bottom-to-top on output */
-                fwrite(&out[3*(h-1-y)*w],1,3*w,f);
-        }
-        fclose(f);
-}
 
 int main(int argc, char** argv)
 {
@@ -136,7 +123,6 @@ int main(int argc, char** argv)
       T.renderGL();
 
       // Swap front and back buffers
-      savePPM(0,0,800,800,"m.ppm");
       glfwSwapBuffers(window);
       
       // Poll for and process events

@@ -1,6 +1,5 @@
 #include "record_frames.hpp"
 
-
 void record::update_params() {
   param_values.push_back(rotate_angle);    
   param_values.push_back(rotate_x);    
@@ -51,10 +50,10 @@ void record::record_frame_params() {
   param_values.clear();
 }
 
-float record::interpolate_linear(float t, float t1, float val1, float val2) {
+float record::interpolate_linear(float t, int t1, float val1, float val2) {
   //t2 is not required as (t2 - t1) is known
   float val_t;
-  val_t = val1 + ((val2 - val1)/TIME_INTERVAL)*(t - t1);
+  val_t = val1 + ((val2 - val1)/(float)TIME_INTERVAL)*(t - t1);
   return val_t;
 }
 
@@ -72,13 +71,14 @@ std::vector<float> record::tokenize_line(std::string line) {
 }
 
 std::vector<float> record::parse_file_and_interpolate(float intermediate_time) {
-  float base_time = intermediate_time/TIME_INTERVAL;
+  int base_time = intermediate_time/TIME_INTERVAL;
   //Now read (base_time + 1)th and (base_time + 2)th line from frames_file
   int cur_line_num = 1;
   frames_file.open("keyframes.txt",std::fstream::in);
   std::string line1, line2;
+  int lines_read = 0;
   if(frames_file.is_open()) {
-    while(cur_line_num != (base_time + 1)) {
+    while(cur_line_num != (int)(base_time + 1)) {
       getline(frames_file, line1);
       cur_line_num++;
     }
@@ -90,7 +90,14 @@ std::vector<float> record::parse_file_and_interpolate(float intermediate_time) {
   std::vector<float> params_t2 = tokenize_line(line2);
   std::vector<float> intermediate_params;
   for(int i=0; i < params_t2.size(); i++) {
+    if(i >= 20 && i <= 23) {
+      printf("%f, %f, %f, %f\n", params_t1[i], params_t2[i], intermediate_time, base_time);
+    }
     float i_val = interpolate_linear(intermediate_time, base_time, params_t1[i], params_t2[i]);
+    
+    if(i >= 20 && i <= 23) {
+      printf("%f\n", i_val);
+    }
     intermediate_params.push_back(i_val);
   }
   return intermediate_params;  

@@ -1,10 +1,16 @@
 #include "gl_framework.hpp"
+#include "record_frames.hpp"
 #include "image.hpp"
 #include "transformer.hpp"
 #include "background.hpp"
 #include <math.h>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <stdlib.h>
 
 #define PI 3.14159265
+#define INTERVAL 1.0
 background myback;
 transformer::transformer() {
   torso_x = 0.3;
@@ -39,7 +45,6 @@ vertex_vec transformer:: CalcNormal(vertex_vec v1, vertex_vec v2) {
   result.z = (v1.x*v2.y - v1.y*v2.x);
   return result;
 }
-
 
 void transformer::load_textures() { 
     glEnable(GL_TEXTURE_2D);
@@ -612,13 +617,49 @@ void transformer::struct_joint(void)
   glEndList();
 }
 
+void savePPM(int start_x,int start_y,int w,int h,const char *fname)
+{
+        FILE *f=fopen(fname,"wb");
+        if (!f) return;
+        std::vector<unsigned char> out(3*w*h);
+        glPixelStorei(GL_PACK_ALIGNMENT,1); /* byte aligned output */
+        glReadPixels(start_x,start_y,w,h, GL_RGB,GL_UNSIGNED_BYTE,&out[0]);
+        fprintf(f,"P6\n%d %d\n255\n",w,h);
+        for (int y=0;y<h;y++) { /* flip image bottom-to-top on output */
+                fwrite(&out[3*(h-1-y)*w],1,3*w,f);
+        }
+        fclose(f);
+}
 
+int count = 1;
 void transformer::renderGL(void)
 {
   //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
  rotate_ball = (rotate_ball - 10)%360;  
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
- DrawTransformer();
+ if(playback) {
+  double end_time = glfwGetTime();
+  while(glfwGetTime() <= end_time + (float)INTERVAL/(float)FPS) {
+  }
+  //float elapse = end_time - start_time;
+  //float factor = INTERVAL/FPS;
+  record r;    
+  std::vector<float> i_params = r.parse_file_and_interpolate(end_time - start_time);
+  r.set_intermediate_params(i_params, end_time - start_time);  
+  
+  DrawTransformer();
+  std::string name = "frame";
+  std::stringstream ss2;
+  ss2 << count;
+  std::string str2 = ss2.str();
+  name += str2;
+  name += ".ppm";
+  savePPM(0,0,800,800,name.c_str());
+  count++; 
+ }
+ else { 
+  DrawTransformer();
+ }
 }
 
 void transformer::DrawTransformer(){

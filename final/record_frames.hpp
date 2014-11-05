@@ -24,14 +24,13 @@ extern int rotate_ball;
 extern float pre_move_x, pre_move_y, pre_move_z;
 extern int camera_number;
 
-
 class record {
   public:
     std::vector<float> param_values;
     std::fstream frames_file;
     void update_params();
     void record_frame_params();
-    float interpolate_linear(float t, float t1, float val1, float val2);
+    float interpolate_linear(float t, int t1, float val1, float val2);
     std::vector<float> tokenize_line(std::string line);
     std::vector<float> parse_file_and_interpolate(float intermediate_time);
     void set_intermediate_params(std::vector<float> params, float i_time);
