@@ -3,6 +3,11 @@
 #include <stdio.h>
 #include <fstream>
 #include <vector>
+#include <string>
+#include <sstream>
+
+#define TIME_INTERVAL 1
+#define FPS 30
 
 extern int rotate_angle,rotate_x,rotate_head;
 extern int rotate_ul_angle,rotate_ur_angle, rotate_ur_angle_y;
@@ -26,6 +31,10 @@ class record {
     std::fstream frames_file;
     void update_params();
     void record_frame_params();
+    float interpolate_linear(float t, float t1, float val1, float val2);
+    std::vector<float> tokenize_line(std::string line);
+    std::vector<float> parse_file_and_interpolate(float intermediate_time);
+    void set_intermediate_params(std::vector<float> params, float i_time);
 };
 
 #endif
