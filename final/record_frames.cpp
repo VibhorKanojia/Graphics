@@ -77,13 +77,18 @@ std::vector<float> record::parse_file_and_interpolate(float intermediate_time) {
   frames_file.open("keyframes.txt",std::fstream::in);
   std::string line1, line2;
   int lines_read = 0;
+
   if(frames_file.is_open()) {
     while(cur_line_num != (int)(base_time + 1)) {
       getline(frames_file, line1);
       cur_line_num++;
     }
-    getline(frames_file, line1);
-    getline(frames_file, line2);
+    if(!getline(frames_file, line1)) {
+      return *new std::vector<float>();
+    }
+    if(!getline(frames_file, line2)) {
+      return *new std::vector<float>();
+    }
   }
   frames_file.close();
   std::vector<float> params_t1 = tokenize_line(line1);
@@ -105,78 +110,80 @@ std::vector<float> record::parse_file_and_interpolate(float intermediate_time) {
 
 void record::set_intermediate_params(std::vector<float> params, float i_time) {
   std::vector<float> i_params = parse_file_and_interpolate(i_time);
-  int i = 0; 
-  rotate_angle = (int)i_params[i];
-  i++;    
-  rotate_x = (int)i_params[i];     
-  i++;    
-  rotate_head = (int)i_params[i];     
-  i++;    
-  rotate_ul_angle = (int)i_params[i];    
-  i++;    
-  rotate_ur_angle = (int)i_params[i];     
-  i++;    
-  rotate_ur_angle_y = (int)i_params[i];     
-  i++;    
-  rotate_ll_angle = (int)i_params[i];     
-  i++;    
-  rotate_lr_angle = (int)i_params[i];     
-  i++;    
-  rotate_ul_angle_y = (int)i_params[i];     
-  i++;    
-  rotate_lr_hand = (int)i_params[i];     
-  i++;    
-  rotate_ur_hand = (int)i_params[i];     
-  i++;    
-  rotate_ul_hand = (int)i_params[i];     
-  i++;    
-  rotate_ll_hand = (int)i_params[i];     
-  i++;    
-  rotate_blades = (int)i_params[i];     
-  i++;    
-  rotate_split = (int)i_params[i];     
-  i++;    
-  rotate_sides = (int)i_params[i];     
-  i++;    
-  rotate_tyre = (int)i_params[i];     
-  i++;    
-  orient_tyre = (int)i_params[i];     
-  i++;    
-  rotate_ul_x = (int)i_params[i];     
-  i++;    
-  rotate_ur_x = (int)i_params[i];     
-  i++;    
-  movement_flag = (int)i_params[i];     
-  i++;    
-  rotate_ball = (int)i_params[i];     
-  i++;    
-  camera_number = (int)i_params[i];     
-  i++;    
-  ur_x = i_params[i];     
-  i++;    
-  ul_x = i_params[i];     
-  i++;    
-  rhand_y = i_params[i];     
-  i++;    
-  lhand_y = i_params[i];     
-  i++;    
-  translate_blades = i_params[i];     
-  i++;    
-  t_head_y = i_params[i];     
-  i++;    
-  gun_rotate = i_params[i];     
-  i++;    
-  t_head_z = i_params[i];     
-  i++;    
-  tilt_left = i_params[i];     
-  i++;    
-  tilt_down = i_params[i];         
-  i++;    
-  pre_move_x = i_params[i];        
-  i++;    
-  pre_move_y = i_params[i];         
-  i++;    
-  pre_move_z = i_params[i];          
+  if(i_params.size() != 0) {
+    int i = 0; 
+    rotate_angle = (int)i_params[i];
+    i++;    
+    rotate_x = (int)i_params[i];     
+    i++;    
+    rotate_head = (int)i_params[i];     
+    i++;    
+    rotate_ul_angle = (int)i_params[i];    
+    i++;    
+    rotate_ur_angle = (int)i_params[i];     
+    i++;    
+    rotate_ur_angle_y = (int)i_params[i];     
+    i++;    
+    rotate_ll_angle = (int)i_params[i];     
+    i++;    
+    rotate_lr_angle = (int)i_params[i];     
+    i++;    
+    rotate_ul_angle_y = (int)i_params[i];     
+    i++;    
+    rotate_lr_hand = (int)i_params[i];     
+    i++;    
+    rotate_ur_hand = (int)i_params[i];     
+    i++;    
+    rotate_ul_hand = (int)i_params[i];     
+    i++;    
+    rotate_ll_hand = (int)i_params[i];     
+    i++;    
+    rotate_blades = (int)i_params[i];     
+    i++;    
+    rotate_split = (int)i_params[i];     
+    i++;    
+    rotate_sides = (int)i_params[i];     
+    i++;    
+    rotate_tyre = (int)i_params[i];     
+    i++;    
+    orient_tyre = (int)i_params[i];     
+    i++;    
+    rotate_ul_x = (int)i_params[i];     
+    i++;    
+    rotate_ur_x = (int)i_params[i];     
+    i++;    
+    movement_flag = (int)i_params[i];     
+    i++;    
+    rotate_ball = (int)i_params[i];     
+    i++;    
+    camera_number = (int)i_params[i];     
+    i++;    
+    ur_x = i_params[i];     
+    i++;    
+    ul_x = i_params[i];     
+    i++;    
+    rhand_y = i_params[i];     
+    i++;    
+    lhand_y = i_params[i];     
+    i++;    
+    translate_blades = i_params[i];     
+    i++;    
+    t_head_y = i_params[i];     
+    i++;    
+    gun_rotate = i_params[i];     
+    i++;    
+    t_head_z = i_params[i];     
+    i++;    
+    tilt_left = i_params[i];     
+    i++;    
+    tilt_down = i_params[i];         
+    i++;    
+    pre_move_x = i_params[i];        
+    i++;    
+    pre_move_y = i_params[i];         
+    i++;    
+    pre_move_z = i_params[i];
+    }          
 }
 /*int main() {
  record r; 

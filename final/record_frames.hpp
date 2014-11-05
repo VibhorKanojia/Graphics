@@ -7,7 +7,7 @@
 #include <sstream>
 
 #define TIME_INTERVAL 1
-#define FPS 30
+#define FPS 120
 
 extern int rotate_angle,rotate_x,rotate_head;
 extern int rotate_ul_angle,rotate_ur_angle, rotate_ur_angle_y;
@@ -22,7 +22,7 @@ extern float tilt_left, tilt_down;
 extern int movement_flag;
 extern int rotate_ball;
 extern float pre_move_x, pre_move_y, pre_move_z;
-extern int camera_number;
+extern int camera_number, frames_recorded;
 
 class record {
   public:

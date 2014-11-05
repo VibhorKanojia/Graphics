@@ -79,7 +79,9 @@ int main(int argc, char** argv)
   T.struct_tail_fan();
   T.struct_tyre();
   b.struct_ground();
-  b.struct_building();
+  b.struct_building(9);
+  b.struct_building(10);
+  b.struct_road();
   
   
   

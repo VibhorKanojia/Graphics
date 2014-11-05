@@ -11,6 +11,7 @@
 
 #define PI 3.14159265
 #define INTERVAL 1.0
+#define TOTAL_CAMERA 4
 background myback;
 transformer::transformer() {
   torso_x = 0.3;
@@ -631,11 +632,11 @@ void savePPM(int start_x,int start_y,int w,int h,const char *fname)
         fclose(f);
 }
 
-int count = 1;
+int fmcount = 1;
 void transformer::renderGL(void)
 {
   //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
- rotate_ball = (rotate_ball - 10)%360;  
+ rotate_ball = rotate_ball - 10;  
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  if(playback) {
   double end_time = glfwGetTime();
@@ -650,12 +651,12 @@ void transformer::renderGL(void)
   DrawTransformer();
   std::string name = "frame";
   std::stringstream ss2;
-  ss2 << count;
+  ss2 << fmcount;
   std::string str2 = ss2.str();
   name += str2;
   name += ".ppm";
   savePPM(0,0,800,800,name.c_str());
-  count++; 
+  fmcount++; 
  }
  else { 
   DrawTransformer();
@@ -678,14 +679,16 @@ void transformer::DrawTransformer(){
   //transformer
   //glRotatef(rotate_angle,0.0,1.0,0.0);
   
-  myback.setCamera(camera_number%3);
+  myback.setCamera(camera_number%TOTAL_CAMERA);
  
   glRotatef(rotate_x,1.0,0.0,0.0);
-	if (camera_number%3 == 2){
-		 glRotatef(-tilt_down,1.0,0.0,0.0);
-		 glRotatef(-tilt_left,0.0,1.0,0.0);
+	if (camera_number%TOTAL_CAMERA == 2){
+		glRotatef(-tilt_down,1.0,0.0,0.0);
+    glRotatef(-tilt_left,0.0,1.0,0.0);
+
 	}
-	if (camera_number%3 !=0){
+	if (camera_number%TOTAL_CAMERA !=0){
+
 		if (movement_flag == 1){
 			glTranslatef(-(pre_move_x+ 0.05*sin(tilt_left*PI/180)),-(pre_move_y + 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180)),-(pre_move_z+ 0.05*sin(tilt_down*PI/180)));
 		}
@@ -695,6 +698,7 @@ void transformer::DrawTransformer(){
 		else{
 			glTranslatef(-pre_move_x,-pre_move_y,-pre_move_z);
 		}
+
 	}
 	
 		glPushMatrix();
@@ -899,7 +903,7 @@ void transformer::DrawTransformer(){
 		      glScalef(1.5,2.5,0.6);						//scaling the trapezium accordingly
 		      glCallList(ru_leg);
 		      glTranslatef(upper_leg_w1/6,-6*(conn_y/2),1.6*conn_z);
-          glScalef(0.75,0.8,0.75);
+          glScalef(0.75,0.8,0.2);
           glCallList(tail);
 		    glPopMatrix();					
 		    /*===================Side tyres====================*/

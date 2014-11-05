@@ -4,9 +4,20 @@
 #include "background.hpp"
 #include "transformer.hpp"
 
-
+#define NUM_BUILDING 10
 transformer t;
 
+#define GRND_LEVEL -0.9
+#define ROAD_LEVEL -0.8
+
+background::background(){
+  for (int i = 0 ; i < NUM_BUILDING ; i++){
+    float randomNumber = (float)(rand() %200 + 100)/ 100;
+    heights.push_back(randomNumber);
+    cout<<randomNumber<<endl;
+    building.push_back(rand()%2);
+  }
+}
 
 void background::load_textures() { 
     glEnable(GL_TEXTURE_2D);
@@ -56,27 +67,51 @@ void background::load_textures() {
     Texture t10(texture[10], "Data/lesson6/buildingtype2.bmp");
     t10.generate();
 
+    glGenTextures(1, &texture[11]);
+    Texture t11(texture[11], "Data/lesson6/road.bmp");
+    t11.generate();
+
     glDisable(GL_TEXTURE_2D);
 };
 
 
 void background::draw_ground(void){
 	glEnable(GL_TEXTURE_2D);
-	 glBindTexture(GL_TEXTURE_2D,texture[2]);
-    //glColor4f(0.01,0.55,0.9,1);
+	glBindTexture(GL_TEXTURE_2D,texture[2]);
+    glColor4f(0,0.4,0.04,1);
     glBegin(GL_POLYGON);
      glTexCoord2f(0,0);
-     glVertex3f(-6,-0.5,-6);
+     glVertex3f(-6,GRND_LEVEL,-20);
      glTexCoord2f(7,0);
-     glVertex3f(6,-0.5,-6);
+     glVertex3f(6,GRND_LEVEL,-20);
      glTexCoord2f(7,7);
-     glVertex3f(6,-0.5,6);
+     glVertex3f(6,GRND_LEVEL,20);
      glTexCoord2f(0,7);
-     glVertex3f(-6,-0.5,6);
+     glVertex3f(-6,GRND_LEVEL,20);
     glEnd();
-     glClearColor(.043,0.62,0.75,1);
 
-     glDisable(GL_TEXTURE_2D);
+  glDisable(GL_TEXTURE_2D);
+}
+
+
+void background::draw_road(void){
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D,texture[11]);
+  glColor4f(0.5,0.5,0.5,1);
+  for (int i = -20 ; i < 20 ; i++){
+    glBegin(GL_POLYGON);
+      glTexCoord2f(0,0);
+      glVertex3f(0,ROAD_LEVEL,-i);
+      glTexCoord2f(1,0);
+      glVertex3f(1,ROAD_LEVEL,-i);
+      glTexCoord2f(1,1);
+      glVertex3f(1,ROAD_LEVEL,-(i+1));
+      glTexCoord2f(0,1);
+      glVertex3f(0,ROAD_LEVEL,-(i+1));
+  glEnd();
+  }
+
+  glDisable(GL_TEXTURE_2D);
 }
 
 
@@ -217,10 +252,10 @@ void background::draw_building(void){
 */
 
 
-void background::draw_building(void){ 
+void background::draw_building(int text_num){ 
   float s = 0.5;
   glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture[10]);
+  glBindTexture(GL_TEXTURE_2D, texture[text_num]);
   //glColor4f(0.8,0.8,1.0,1.0);
   glBegin(GL_POLYGON);
     glTexCoord2f(0,1);
@@ -292,11 +327,25 @@ void background::struct_ground(void){
 }
 
 
-void background::struct_building(void){
-	glNewList(blding,GL_COMPILE); 
-		draw_building();
-	glEndList();
+void background::struct_road(void){
+  glNewList(rd,GL_COMPILE); 
+    draw_road();
+  glEndList();
 }
+
+void background::struct_building(int text_num){
+	if (text_num == 9){
+    glNewList(blding1,GL_COMPILE); 
+	   draw_building(text_num);
+	 glEndList();
+  } 
+  else {
+    glNewList(blding2,GL_COMPILE); 
+     draw_building(text_num);
+   glEndList();
+  } 
+}
+
 
 void background::createRoom(){
 	
@@ -305,9 +354,40 @@ void background::createRoom(){
 void background::createScene(){
     glPushMatrix();
       glCallList(grnd);
-      glTranslatef(0,-0.5,-3);
-      glScalef(2,2,1);
-      glCallList(blding);
+      glCallList(rd);
+      glPushMatrix();
+        glTranslatef(2,GRND_LEVEL,2);
+        for (int i = 0 ; i < NUM_BUILDING ; i++){
+          glTranslatef(0,0,-1);
+          glPushMatrix();
+            glScalef(2,heights[i],1);
+            if (building[i]){
+              glCallList(blding1);
+            }
+            else{
+              glCallList(blding2);
+            }
+          glPopMatrix();
+        }
+      glPopMatrix();
+
+      glPushMatrix();
+        glTranslatef(-2,GRND_LEVEL,2);
+        for (int i = 0 ; i < NUM_BUILDING ; i++){
+          glTranslatef(0,0,-1);
+          glPushMatrix();
+            glScalef(2,heights[i],1);
+            if (!building[i]){
+              glCallList(blding1);
+            }
+            else{
+              glCallList(blding2);
+            }
+          glPopMatrix();
+        }
+      glPopMatrix();
+
+
     glPopMatrix();
 }
 
@@ -321,5 +401,8 @@ void background::setCamera(int cam_pos){
 	if (cam_pos == 2){
 		gluLookAt(0,3,-2.2,0 , 0 , -6 , 0, 1, 0);
 	}
+  if (cam_pos == 3){
+    gluLookAt(0,3,0.7,0 , 0 , 6 , 0, 1, 0);
+  }
 }
 

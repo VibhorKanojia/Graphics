@@ -101,6 +101,7 @@ namespace csX75
     
     if (key == GLFW_KEY_0 && action == GLFW_PRESS){
       record r;
+      frames_recorded++;
       r.update_params();
       r.record_frame_params();
     }
@@ -348,7 +349,7 @@ namespace csX75
         rotate_lr_hand = 26*5;
         rotate_ul_hand = 9*5;
         rotate_ll_hand =  - 26*5;
-        rotate_split =  8*5;
+        rotate_split =  14*5;
         translate_blades = 20*0.01;
         rotate_blades = 18*5;
         gun_rotate = 26*0.01;

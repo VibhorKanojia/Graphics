@@ -3,3 +3,15 @@ Added a single building and ground.
 Rotation angle of blades changed.
 Changed the near and far plane of frustrum. So now even "driver's view" looks awesome B|
 -------------------------------
+
+changes - Vibhor
+
+Reduced the size of back blades. Back blades ko rotate karne mein pain hoga. :P
+
+Added random collection of buildings.
+Added extra camera.
+
+Caution FPS is set to 120. Make it 30 before using.
+THis was done to make the transformation smoother. Press 8 to see the animation.
+
+-------------------------
