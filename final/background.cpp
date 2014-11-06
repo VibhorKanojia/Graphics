@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include "gl_framework.hpp"
 #include "image.hpp"
 #include "background.hpp"

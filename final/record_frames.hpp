@@ -7,7 +7,7 @@
 #include <sstream>
 
 #define TIME_INTERVAL 1
-#define FPS 120
+#define FPS 30
 
 extern int rotate_angle,rotate_x,rotate_head;
 extern int rotate_ul_angle,rotate_ur_angle, rotate_ur_angle_y;
