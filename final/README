@@ -15,3 +15,11 @@ Caution FPS is set to 120. Make it 30 before using.
 THis was done to make the transformation smoother. Press 8 to see the animation.
 
 -------------------------
+
+
+change - vibhor
+
+Added ocean; changed the background; added bomb, texture on head; reduced size of the transformer.
+Now we just have to create the animation properly.
+
+-------------------------

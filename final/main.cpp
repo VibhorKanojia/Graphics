@@ -78,6 +78,8 @@ int main(int argc, char** argv)
   T.struct_blade();	
   T.struct_tail_fan();
   T.struct_tyre();
+  T.struct_bomb();
+  T.struct_legs();
   b.struct_ground();
   b.struct_building(9);
   b.struct_building(10);

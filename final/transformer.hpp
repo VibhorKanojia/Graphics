@@ -15,7 +15,8 @@
 #define tail 10
 #define stand 11
 #define tyre 12
-
+#define bomb 13
+#define legs 14
 
 extern int rotate_angle,rotate_x,rotate_head;
 extern int rotate_ul_angle,rotate_ur_angle, rotate_ur_angle_y;
@@ -87,6 +88,7 @@ class transformer {
     void struct_connectors(void);
     void struct_head(void);
     void struct_blade(void);
+    void struct_legs(void);
     void struct_right_upper_leg(void);
     void struct_tail_fan(void);
     void struct_right_lower_leg(void);
@@ -94,8 +96,11 @@ class transformer {
     void struct_right_lower_hand(void);
     void struct_joint(void);
     void renderGL(void);
+    void DrawHead(float s);
     void resetCamera(void);
     void DrawBackground(void);
+    void DrawBomb(void);
+    void struct_bomb(void);
 };
 #endif
 

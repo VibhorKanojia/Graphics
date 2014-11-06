@@ -6,6 +6,7 @@ using namespace std;
 #define blding1 1001
 #define blding2 1002
 #define rd 1003
+#define mtrte 1004
 
 class background {
 public:
@@ -15,6 +16,12 @@ public:
 	background();
 	void load_textures();
 	void draw_road();
+	/*
+	void draw_meteorite(float r, int tesselation);
+	void draw_segment(float R, float z1, float z2, int myprecision);
+	void struct_meteorite();
+	*/
+
 	void struct_road();
 	void draw_building(int text_num);
 	void draw_ground();

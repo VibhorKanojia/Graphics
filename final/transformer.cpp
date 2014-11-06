@@ -87,6 +87,14 @@ void transformer::load_textures() {
     Texture t8(texture[8], "Data/lesson6/birdview.bmp");
     t8.generate();
 
+    glGenTextures(1, &texture[9]);
+    Texture t9(texture[9], "Data/lesson6/bomb.bmp");
+    t9.generate();
+
+    glGenTextures(1, &texture[10]);
+    Texture t10(texture[10], "Data/lesson6/head.bmp");
+    t10.generate();
+
     glDisable(GL_TEXTURE_2D);
 };
 
@@ -439,6 +447,176 @@ void transformer::DrawCube(float s){
   
 }
 
+
+
+
+void transformer::DrawBomb(void){
+  float s = 0.5;
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture[9]);   // choose the texture to use.
+  glColor4f(0.8,0.8,1.0,1.0);
+  glBegin(GL_QUAD_STRIP);
+    vertex_vec v1,v2,res;
+    v1.x = 0.0;
+    v1.y = s;
+    v1.z = 0.0;
+    v2.x = -s;
+    v2.y = 0.0;
+    v2.z = 0.0;
+    res = CalcNormal(v1,v2);
+    glNormal3d(res.x,res.y,res.z);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0,s,0.0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0,0.0,0.0);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(s,s,0.0);
+  glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(s,0.0,0.0);
+  
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(s,s,-s);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(s,0.0,-s);
+    
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.0,s,-s);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.0,0.0,-s);
+    
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0,s,0.0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0,0.0,0.0);
+  glEnd();
+
+  glBegin(GL_QUAD_STRIP);
+    v1.x = -s;
+    v1.y = 0.0;
+    v1.z = 0.0;
+    v2.x = 0.0;
+    v2.y = 0.0;
+    v2.z = s;
+    res = CalcNormal(v1,v2);
+    glNormal3d(res.x,res.y,res.z);
+    glTexCoord2f(0,1);
+    glVertex3f(0.0,s,0.0);
+    glTexCoord2f(1,1);
+    glVertex3f(s,s,0.0);
+    glTexCoord2f(0,0);
+    glVertex3f(0,s,-s);
+  glTexCoord2f(1,0);
+    glVertex3f(s,s,-s);
+  glEnd();
+
+  glBegin(GL_QUAD_STRIP);
+    v1.x = -s;
+    v1.y = 0.0;
+    v1.z = 0.0;
+    v2.x = 0.0;
+    v2.y = 0.0;
+    v2.z = s;
+    res = CalcNormal(v1,v2);
+    glNormal3d(res.x,res.y,res.z);
+    glTexCoord2f(0,1);
+    glVertex3f(0.0,0.0,0.0);
+    glTexCoord2f(1,1);
+    glVertex3f(s,0.0,0.0);
+    glTexCoord2f(0,0);
+    glVertex3f(0.0,0.0,-s);
+    glTexCoord2f(1,0);
+    glVertex3f(s,0.0,-s);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+  
+}
+
+
+void transformer::DrawHead(float s){
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture[10]);   // choose the texture to use.
+  glColor4f(0.6,0,0,1.0);
+  glBegin(GL_QUAD_STRIP);
+    vertex_vec v1,v2,res;
+    v1.x = 0.0;
+    v1.y = s;
+    v1.z = 0.0;
+    v2.x = -s;
+    v2.y = 0.0;
+    v2.z = 0.0;
+    res = CalcNormal(v1,v2);
+    glNormal3d(res.x,res.y,res.z);
+    //glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0,s,0.0);
+    //glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0,0.0,0.0);
+    //glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(s,s,0.0);
+    //glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(s,0.0,0.0);
+     
+
+  
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(s,s,-s);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(s,0.0,-s);
+    
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(0.0,s,-s);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(0.0,0.0,-s);
+    
+    //glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0,s,0.0);
+    //glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0,0.0,0.0);
+  glEnd();
+
+  glBindTexture(GL_TEXTURE_2D, texture[2]);   // choose the texture to use.
+  glBegin(GL_QUAD_STRIP);
+    v1.x = -s;
+    v1.y = 0.0;
+    v1.z = 0.0;
+    v2.x = 0.0;
+    v2.y = 0.0;
+    v2.z = s;
+    res = CalcNormal(v1,v2);
+    glNormal3d(res.x,res.y,res.z);
+    glTexCoord2f(0,1);
+    glVertex3f(0.0,s,0.0);
+    glTexCoord2f(1,1);
+    glVertex3f(s,s,0.0);
+    glTexCoord2f(0,0);
+    glVertex3f(0,s,-s);
+  glTexCoord2f(1,0);
+    glVertex3f(s,s,-s);
+  glEnd();
+
+  glBegin(GL_QUAD_STRIP);
+    v1.x = -s;
+    v1.y = 0.0;
+    v1.z = 0.0;
+    v2.x = 0.0;
+    v2.y = 0.0;
+    v2.z = s;
+    res = CalcNormal(v1,v2);
+    glNormal3d(res.x,res.y,res.z);
+    glTexCoord2f(0,1);
+    glVertex3f(0.0,0.0,0.0);
+    glTexCoord2f(1,1);
+    glVertex3f(s,0.0,0.0);
+    glTexCoord2f(0,0);
+    glVertex3f(0.0,0.0,-s);
+    glTexCoord2f(1,0);
+    glVertex3f(s,0.0,-s);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+  
+}
+
+
+
 void transformer::DrawTrapezoid(float l1, float l2, float h){
 	glColor4f(1,1,1,1);
   glEnable(GL_TEXTURE_2D);
@@ -522,7 +700,7 @@ void transformer::struct_tyre(void){
 		glCallList(connectors);
 		glTranslatef(-(conn_y)/4,-0.13,(conn_y)/4);
 		glScalef(0.3,1,0.3);
-		glCallList(head);
+		glCallList(legs);
 		glScalef(10/3,1,10/3);
 		glTranslatef(0.0,-0.05,-0.015);
 		glRotatef(90,0.0,1.0,0.0);
@@ -555,10 +733,25 @@ void transformer::struct_head(void)
 {
   glNewList(head,GL_COMPILE); 
 	// head
-	DrawCube(0.1);   
+	DrawHead(0.1);   
   glEndList();
 }
 
+
+void transformer::struct_legs(void)
+{
+  glNewList(legs,GL_COMPILE); 
+  // legs
+  DrawCube(0.1);   
+  glEndList();
+}
+
+void transformer::struct_bomb(void)
+{
+  glNewList(bomb,GL_COMPILE);
+    DrawBomb();
+  glEndList();
+}
 void transformer::struct_blade(void)
 {
   glNewList(blade,GL_COMPILE);
@@ -666,15 +859,8 @@ void transformer::renderGL(void)
 void transformer::DrawTransformer(){
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-   glPushMatrix();
-	//glCallList(grnd);
-  glPopMatrix();
   
-   glPushMatrix();
-	//glCallList(blding);
-  glPopMatrix();
-  
-	glScalef(0.5,0.5,0.5);
+	glScalef(0.2,0.2,0.2);
 	glTranslatef(0,3.5,-0.1);
   //transformer
   //glRotatef(rotate_angle,0.0,1.0,0.0);
@@ -705,9 +891,9 @@ void transformer::DrawTransformer(){
 			glRotatef(-rotate_x,1.0,0.0,0.0);
 			myback.createScene();
 	glPopMatrix();
+
    /*================torso=================*/
-    glPushMatrix();
-      
+    glPushMatrix();   
 		if (movement_flag == 1){
 			glTranslatef(pre_move_x+ 0.05*sin(tilt_left*PI/180), pre_move_y + 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180),pre_move_z+ 0.05*sin(tilt_down*PI/180));
 			pre_move_x = pre_move_x+ 0.05*sin(tilt_left*PI/180);
@@ -736,6 +922,15 @@ void transformer::DrawTransformer(){
       glScalef(0.5,1.0,0.5);					//scaling the sphere to make an oval
 	    glCallList(torso);
       glScalef(2.0,1.0,2.0);					// scaling back to normal coordinates
+      glPushMatrix();
+        glPushMatrix();
+          glScalef(0.1,0.1,3);
+          glCallList(legs);
+        glPopMatrix();
+        glTranslatef(-0.05,-0.05,-0.3);
+          glScalef(0.1,0.2,0.2);
+        glCallList(bomb);
+      glPopMatrix();
         GLfloat  lightPos[] = { 0.0f, 0.0f, 0.2f, 1.0f };
         GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
         GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -955,7 +1150,7 @@ void transformer::DrawTransformer(){
             glPushMatrix();
               glScalef(1.0,0.33,1.0);
 		          glTranslatef(0.0,0.1,0.0);
-              glCallList(head);
+              glCallList(legs);
             glPopMatrix();
             //rl_hand part-3
             glPushMatrix();
