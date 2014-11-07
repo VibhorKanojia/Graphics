@@ -533,9 +533,9 @@ void transformer::DrawBomb(void){
 
 
 void transformer::DrawHead(float s){
-  glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture[10]);   // choose the texture to use.
-  glColor4f(0.6,0,0,1.0);
+  //glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture[2]);   // choose the texture to use.
+  //glColor4f(1,1,1,1.0);
   glBegin(GL_QUAD_STRIP);
     vertex_vec v1,v2,res;
     v1.x = 0.0;
@@ -860,8 +860,8 @@ void transformer::DrawTransformer(){
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   
-	glScalef(0.2,0.2,0.2);
-	glTranslatef(0,3.5,-0.1);
+	//glScalef(0.2,0.2,0.2);
+	//glTranslatef(0,3.5,-3);
   //transformer
   //glRotatef(rotate_angle,0.0,1.0,0.0);
   
@@ -876,16 +876,18 @@ void transformer::DrawTransformer(){
 	if (camera_number%TOTAL_CAMERA !=0){
 
 		if (movement_flag == 1){
-			glTranslatef(-(pre_move_x+ 0.05*sin(tilt_left*PI/180)),-(pre_move_y + 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180)),-(pre_move_z+ 0.05*sin(tilt_down*PI/180)));
+			glTranslatef(-(pre_move_x+ 0.5*sin(tilt_left*PI/180)),-(pre_move_y + 0.5*cos(tilt_left*PI/180)*cos(tilt_down*PI/180)),-(pre_move_z+ 0.5*sin(tilt_down*PI/180)));
 		}
 		else if (movement_flag == 2){
-			glTranslatef(-(pre_move_x -  0.05*sin(tilt_left*PI/180)),-(pre_move_y - 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180)),-(pre_move_z- 0.05*sin(tilt_down*PI/180)));
+			glTranslatef(-(pre_move_x -  0.5*sin(tilt_left*PI/180)),-(pre_move_y - 0.5*cos(tilt_left*PI/180)*cos(tilt_down*PI/180)),-(pre_move_z- 0.5*sin(tilt_down*PI/180)));
 		}
 		else{
 			glTranslatef(-pre_move_x,-pre_move_y,-pre_move_z);
 		}
 
 	}
+
+    //cout<<pre_move_x<<" "<<pre_move_y<<" "<<pre_move_z<<endl;
 	
 		glPushMatrix();
 			glRotatef(-rotate_x,1.0,0.0,0.0);
@@ -894,21 +896,22 @@ void transformer::DrawTransformer(){
 
    /*================torso=================*/
     glPushMatrix();   
+    //glTranslatef(0,-2,0);
 		if (movement_flag == 1){
-			glTranslatef(pre_move_x+ 0.05*sin(tilt_left*PI/180), pre_move_y + 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180),pre_move_z+ 0.05*sin(tilt_down*PI/180));
-			pre_move_x = pre_move_x+ 0.05*sin(tilt_left*PI/180);
-			pre_move_y = pre_move_y + 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180);
-			pre_move_z = pre_move_z+ 0.05*sin(tilt_down*PI/180);
+			glTranslatef(pre_move_x+ 0.5*sin(tilt_left*PI/180), pre_move_y + 0.5*cos(tilt_left*PI/180)*cos(tilt_down*PI/180),pre_move_z+ 0.5*sin(tilt_down*PI/180));
+			pre_move_x = pre_move_x+ 0.5*sin(tilt_left*PI/180);
+			pre_move_y = pre_move_y + 0.5*cos(tilt_left*PI/180)*cos(tilt_down*PI/180);
+			pre_move_z = pre_move_z+ 0.5*sin(tilt_down*PI/180);
       //pre_move_z = pre_move_z + 0.05*cos(tilt_down*PI/180);
 			//std::cout<<pre_move_x<<" "<<pre_move_y<<std::endl;
 			movement_flag =0;
 			
 		}
 		else if (movement_flag == 2){
-			glTranslatef(pre_move_x -  0.05*sin(tilt_left*PI/180), pre_move_y - 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180),pre_move_z- 0.05*sin(tilt_down*PI/180));
-			pre_move_x = pre_move_x - 0.05*sin(tilt_left*PI/180);
-			pre_move_y = pre_move_y - 0.05*cos(tilt_left*PI/180)*cos(tilt_down*PI/180);
-			pre_move_z = pre_move_z -  0.05*sin(tilt_down*PI/180);
+			glTranslatef(pre_move_x -  0.5*sin(tilt_left*PI/180), pre_move_y - 0.5*cos(tilt_left*PI/180)*cos(tilt_down*PI/180),pre_move_z- 0.5*sin(tilt_down*PI/180));
+			pre_move_x = pre_move_x - 0.5*sin(tilt_left*PI/180);
+			pre_move_y = pre_move_y - 0.5*cos(tilt_left*PI/180)*cos(tilt_down*PI/180);
+			pre_move_z = pre_move_z -  0.5*sin(tilt_down*PI/180);
 			//pre_move_z = pre_move_z - 0.05*cos(tilt_down*PI/180);
       movement_flag =0;
 		}
@@ -917,6 +920,7 @@ void transformer::DrawTransformer(){
 		}
 	  
       //glTranslatef(move_back,0.0,0.0);
+      glTranslatef(0,0,torso_move_z);
       glRotatef(tilt_left,0.0,1.0,0.0);
       glRotatef(tilt_down,1.0,0.0,0.0);
       glScalef(0.5,1.0,0.5);					//scaling the sphere to make an oval
@@ -928,7 +932,7 @@ void transformer::DrawTransformer(){
           glCallList(legs);
         glPopMatrix();
         glTranslatef(-0.05,-0.05,-0.3);
-          glScalef(0.1,0.2,0.2);
+          glScalef(0.3,0.3,0.3);
         glCallList(bomb);
       glPopMatrix();
         GLfloat  lightPos[] = { 0.0f, 0.0f, 0.2f, 1.0f };
@@ -1124,6 +1128,7 @@ void transformer::DrawTransformer(){
       glPushMatrix();
 			  glTranslatef((torso_x/2 + conn_x/2) , (torso_y/2 - upper_hand_y/2) , -(conn_z/2));	
 	      glTranslatef(0.0,rhand_y,0.0);
+        glRotatef(rotate_ur_hand_x,1.0,0.0,0.0);
         glRotatef(rotate_ur_hand,0.0,0.0,1.0);
 	      glCallList(connectors);
 		    glPushMatrix();			// origin shifted to BOTTOM LEFT corner of the upper hand
@@ -1167,6 +1172,7 @@ void transformer::DrawTransformer(){
 			glPushMatrix();
 			  glTranslatef(-(torso_x/2 + conn_x/2) , (torso_y/2 - upper_hand_y/2) , -(conn_z/2));	
 	      glTranslatef(0.0,lhand_y,0.0);
+        glRotatef(rotate_ul_hand_x,1.0,0.0,0.0);
         glRotatef(rotate_ul_hand,0.0,0.0,1.0);
 	      glCallList(connectors);
 		    glPushMatrix();			// origin shifted to BOTTOM LEFT corner of the upper hand

@@ -12,9 +12,9 @@ float ul_x = 0.0;
 int rotate_ll_angle = 0;
 int rotate_lr_angle = 0;
 int rotate_x = 0;
-int rotate_ur_hand = 0;
+int rotate_ur_hand = -70;
 int rotate_lr_hand = 0;
-int rotate_ul_hand = 0;
+int rotate_ul_hand = 75;
 int rotate_ll_hand = 0;
 int rotate_stand_bottom = 0;
 int rotate_blades = 0;
@@ -41,7 +41,12 @@ int camera_number = 0;
 int rotate_ball = 0;
 bool playback = false;
 float start_time = 0.0;
+float torso_move_z = 0;
 int frames_recorded = 0;
+float rotate_ur_hand_x = 0;
+float rotate_ul_hand_x = 0;
+int expl_flag = 0;
+float expl_scl = 0.5;
 
 namespace csX75
 {
@@ -75,7 +80,7 @@ namespace csX75
     //!Resize the viewport to fit the window size - draw to entire window
     glViewport(0, 0, width, height);
     double aspect;
-    gluPerspective(120,(double)width/(double)height, 0.001 , 200.0);
+    gluPerspective(120,(double)width/(double)height, 0.001 , 300.0);
    
   }
   
@@ -116,6 +121,8 @@ namespace csX75
     if (key == GLFW_KEY_UP && action == GLFW_PRESS){
       movement_flag=1;
     }
+
+
     
     if (key == GLFW_KEY_DOWN && action == GLFW_PRESS){
       movement_flag =2;
@@ -162,16 +169,16 @@ namespace csX75
     
     if (key == GLFW_KEY_V && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        rotate_tyre = rotate_tyre - 5;
+        expl_scl = 2.5;
       }
-      else rotate_tyre= rotate_tyre + 5;
+      else expl_scl= 0.5;
     }
     
     if (key == GLFW_KEY_C && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        orient_tyre = orient_tyre - 5;
+        expl_flag = 1;
       }
-      else orient_tyre= orient_tyre + 5;
+      else expl_flag = 0;
     }
     
     if (key == GLFW_KEY_D && action == GLFW_PRESS){
@@ -225,9 +232,9 @@ namespace csX75
     
     if (key == GLFW_KEY_J && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        rotate_split = rotate_split - 5;
+        rotate_ul_hand_x = rotate_ul_hand_x - 5;
       }
-      else rotate_split = rotate_split + 5;
+      else rotate_ul_hand_x = rotate_ul_hand_x + 5;
     }
 
     if (key == GLFW_KEY_K && action == GLFW_PRESS){
@@ -239,16 +246,16 @@ namespace csX75
     
     if (key == GLFW_KEY_Z && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        gun_rotate = gun_rotate - 0.01;
+        torso_move_z = torso_move_z - 0.03;
       }
-      else gun_rotate = gun_rotate + 0.01;
+      else torso_move_z = torso_move_z + 0.03;
     }
     
     if (key == GLFW_KEY_L && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        rotate_blades = rotate_blades - 5;
+        rotate_ur_hand_x = rotate_ur_hand_x - 5;
       }
-      else rotate_blades = rotate_blades + 5;
+      else rotate_ur_hand_x = rotate_ur_hand_x + 5;
     }
         
     if (key == GLFW_KEY_G && action == GLFW_PRESS){
@@ -268,9 +275,9 @@ namespace csX75
     
     if (key == GLFW_KEY_M && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
-        t_head_z = t_head_z - 0.01;
+        rotate_head = rotate_head - 5;
       }
-      else  t_head_z = t_head_z + 0.01;
+      else  rotate_head  = rotate_head + 5;
     }
     
     if (key == GLFW_KEY_B && action == GLFW_PRESS){
@@ -285,6 +292,7 @@ namespace csX75
         rotate_ur_hand = rotate_ur_hand - 5;
       }
       else rotate_ur_hand = rotate_ur_hand + 5;
+      std::cout<<"rotate_ur "<<rotate_ur_hand<<std::endl;
     }
     
     if (key == GLFW_KEY_R && action == GLFW_PRESS){
@@ -299,6 +307,7 @@ namespace csX75
         rotate_ul_hand = rotate_ul_hand - 5;
       }
       else rotate_ul_hand = rotate_ul_hand + 5;
+      std::cout<<"roatate_ul "<<rotate_ul_hand<<std::endl;
     }
     
     if (key == GLFW_KEY_U && action == GLFW_PRESS){
@@ -318,9 +327,9 @@ namespace csX75
         rotate_ll_angle = 0;
         rhand_y = 0;
         lhand_y = 0;
-        rotate_ur_hand = 0;
+        rotate_ur_hand = -70;
         rotate_lr_hand = 0;
-        rotate_ul_hand = 0;
+        rotate_ul_hand = 75;
         rotate_ll_hand = 0;
         rotate_split = 0;
         translate_blades = 0;

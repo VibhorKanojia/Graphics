@@ -33,6 +33,8 @@ extern int rotate_ball;
 extern float pre_move_x, pre_move_y, pre_move_z, start_time;
 extern int camera_number;
 extern bool playback;
+extern float torso_move_z;
+extern float rotate_ur_hand_x, rotate_ul_hand_x;
 
 struct vertex_vec {
   GLdouble x;
@@ -68,6 +70,7 @@ class transformer {
     float lower_hand_x;
     float lower_hand_y;
     float lower_hand_z;
+
     int cam_pos;
     
     transformer();

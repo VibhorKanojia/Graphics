@@ -23,6 +23,8 @@ extern int movement_flag;
 extern int rotate_ball;
 extern float pre_move_x, pre_move_y, pre_move_z;
 extern int camera_number, frames_recorded;
+extern float torso_move_z;
+extern float rotate_ur_hand_x, rotate_ul_hand_x, expl_scl;
 
 class record {
   public:

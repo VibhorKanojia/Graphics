@@ -148,7 +148,12 @@ int ImageLoad(std::string filename, Image *image) {
        image->data[d] = buffer[s];
        image->data[d+1] = buffer[s+1];
        image->data[d+2] = buffer[s+2];
-       image->data[d+3] = 255;
+       if (image->data[d] == 255 && image->data[d+1] == 255 && image->data[d+2] == 255){
+        image->data[d+3] = 0;
+       }
+       else{
+        image->data[d+3] = 255;
+       }
     }
 
     //free the temp buffer

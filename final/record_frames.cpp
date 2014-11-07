@@ -36,7 +36,11 @@ void record::update_params() {
   param_values.push_back(tilt_down);        
   param_values.push_back(pre_move_x);        
   param_values.push_back(pre_move_y);        
-  param_values.push_back(pre_move_z);        
+  param_values.push_back(pre_move_z);
+  param_values.push_back(torso_move_z);
+  param_values.push_back(rotate_ur_hand_x);
+  param_values.push_back(rotate_ul_hand_x);
+  param_values.push_back(expl_scl);        
 }
 
 void record::record_frame_params() {
@@ -98,12 +102,18 @@ std::vector<float> record::parse_file_and_interpolate(float intermediate_time) {
     if(i >= 20 && i <= 23) {
       printf("%f, %f, %f, %f\n", params_t1[i], params_t2[i], intermediate_time, base_time);
     }
-    float i_val = interpolate_linear(intermediate_time, base_time, params_t1[i], params_t2[i]);
-    
-    if(i >= 20 && i <= 23) {
-      printf("%f\n", i_val);
+    float i_val;
+    if (i == 22){
+      intermediate_params.push_back(params_t2[i]);
     }
-    intermediate_params.push_back(i_val);
+    if(i != 22) { 
+      i_val = interpolate_linear(intermediate_time, base_time, params_t1[i], params_t2[i]);
+    
+      if(i >= 20 && i <= 23) {
+        printf("%f\n", i_val);
+      }
+      intermediate_params.push_back(i_val);
+    }
   }
   return intermediate_params;  
 }
@@ -183,6 +193,14 @@ void record::set_intermediate_params(std::vector<float> params, float i_time) {
     pre_move_y = i_params[i];         
     i++;    
     pre_move_z = i_params[i];
+    i++;    
+    torso_move_z = i_params[i];
+    i++;    
+    rotate_ur_hand_x = i_params[i];
+    i++;    
+    rotate_ul_hand_x = i_params[i];
+    i++;    
+    expl_scl = i_params[i];
     }          
 }
 /*int main() {

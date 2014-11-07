@@ -7,6 +7,11 @@ using namespace std;
 #define blding2 1002
 #define rd 1003
 #define mtrte 1004
+#define before 1005
+#define after 1006
+
+extern int expl_flag;
+extern float expl_scl;
 
 class background {
 public:
@@ -16,12 +21,15 @@ public:
 	background();
 	void load_textures();
 	void draw_road();
+	void draw_front();
+	void draw_front_after();
 	/*
 	void draw_meteorite(float r, int tesselation);
 	void draw_segment(float R, float z1, float z2, int myprecision);
 	void struct_meteorite();
 	*/
-
+	void struct_front();
+	void struct_front_after();
 	void struct_road();
 	void draw_building(int text_num);
 	void draw_ground();

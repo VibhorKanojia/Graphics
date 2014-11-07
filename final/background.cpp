@@ -11,8 +11,8 @@
 #define NUM_BUILDING 10
 transformer t;
 
-#define GRND_LEVEL -0.9
-#define ROAD_LEVEL -0.8
+#define GRND_LEVEL -0.3
+#define ROAD_LEVEL -0.2
 
 background::background(){
   for (int i = 0 ; i < NUM_BUILDING ; i++){
@@ -79,6 +79,15 @@ void background::load_textures() {
     Texture t12(texture[12], "Data/lesson6/rough.bmp");
     t12.generate();
 
+    glGenTextures(1, &texture[13]);
+    Texture t13(texture[13], "Data/lesson6/explosion_before.bmp");
+    t13.generate();
+
+    glGenTextures(1, &texture[14]);
+    Texture t14(texture[14], "Data/lesson6/explosion_after.bmp");
+    t14.generate();
+
+
     glDisable(GL_TEXTURE_2D);
 };
 
@@ -99,7 +108,7 @@ void background::draw_ground(void){
     glEnd();
 
   glBindTexture(GL_TEXTURE_2D,texture[2]);
-    glColor4f(0,0,1,1);
+    glColor4f(.1,.1,1,1);
     glBegin(GL_POLYGON);
      glTexCoord2f(0,0);
      glVertex3f(-10,GRND_LEVEL,-20);
@@ -111,9 +120,48 @@ void background::draw_ground(void){
      glVertex3f(-10,GRND_LEVEL,-30);
     glEnd();
 
-
+  
   glDisable(GL_TEXTURE_2D);
 }
+
+
+void background::draw_front(){
+    glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D,texture[13]);
+
+    glColor4f(.85,0.91,0.97,1);
+    glBegin(GL_POLYGON);
+     glTexCoord2f(0,0);
+     glVertex3f(-200,GRND_LEVEL-100,-140);
+     glTexCoord2f(1,0);
+     glVertex3f(200,GRND_LEVEL-100,-140);
+     glTexCoord2f(1,1);
+     glVertex3f(200,GRND_LEVEL+200,-140);
+     glTexCoord2f(0,1);
+     glVertex3f(-200,GRND_LEVEL+200,-140);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+
+void background::draw_front_after(){
+    glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D,texture[14]);
+
+    glColor4f(.043,0.62,0.75,1);
+    glBegin(GL_POLYGON);
+     glTexCoord2f(0,0);
+     glVertex3f(-30,GRND_LEVEL,-100);
+     glTexCoord2f(1,0);
+     glVertex3f(30,GRND_LEVEL,-100);
+     glTexCoord2f(1,1);
+     glVertex3f(30,GRND_LEVEL+60,-100);
+     glTexCoord2f(0,1);
+     glVertex3f(-30,GRND_LEVEL+60,-100);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
 
 
 
@@ -149,6 +197,19 @@ void background::draw_road(void){
   }
 
   glDisable(GL_TEXTURE_2D);
+}
+
+
+void background::struct_front(){
+  glNewList(before,GL_COMPILE); 
+    draw_front();
+  glEndList();
+}
+
+void background::struct_front_after(){
+  glNewList(after,GL_COMPILE); 
+    draw_front_after();
+  glEndList();
 }
 /*
 void background::draw_meteorite(float r, int tesselation){ 
@@ -368,20 +429,26 @@ void background::createScene(){
       glTranslatef(0, GRND_LEVEL+2,-3);
       glCallList(mtrte);
     glPopMatrix();
+    glPushMatrix();
+      glScalef(expl_scl,expl_scl,1);
+      if (expl_flag == 1){
+        glCallList(after);
+      }
+    glPopMatrix();
 }
 
 void background::setCamera(int cam_pos){
 	if (cam_pos  == 1){
-		gluLookAt(0,3,-0.7,0 , 0 , -6 , 0, 1, 0);
+		gluLookAt(0,1,1.4,0 , 0 , -6 , 0, 1, 0);
 	}
 	if (cam_pos == 0){
-		gluLookAt(0,3.2,0,0 , 0 , -6 , 0, 1, 0);
+		gluLookAt(0,1,2,0 , 0 , -6 , 0, 1, 0);
 	}
 	if (cam_pos == 2){
-		gluLookAt(0,3,-2.2,0 , 0 , -6 , 0, 1, 0);
+		gluLookAt(0,0.7,0.4,0 , 0 , -6 , 0, 1, 0);
 	}
   if (cam_pos == 3){
-    gluLookAt(0,3,0.7,0 , 0 , 6 , 0, 1, 0);
+    gluLookAt(0,0.5,-1.5,0 , 0 , 6 , 0, 1, 0);
   }
 }
 

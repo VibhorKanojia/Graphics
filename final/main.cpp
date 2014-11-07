@@ -84,7 +84,8 @@ int main(int argc, char** argv)
   b.struct_building(9);
   b.struct_building(10);
   b.struct_road();
-  
+  b.struct_front();
+  b.struct_front_after();
   
   
   GLfloat diffuse1[] = {0.0,0.5,0.8,1.0};
@@ -111,7 +112,7 @@ int main(int argc, char** argv)
   glLightfv(GL_LIGHT4, GL_SPECULAR, specular4);
   //glEnable(GL_LIGHTING);
   //glEnable(GL_LIGHT0);
-  glEnable(GL_LIGHT1);
+  //glEnable(GL_LIGHT1);
   //glEnable(GL_LIGHT2);
   //glEnable(GL_LIGHT3);
   glEnable(GL_LIGHT4);
