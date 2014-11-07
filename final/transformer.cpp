@@ -533,86 +533,7 @@ void transformer::DrawBomb(void){
 
 
 void transformer::DrawHead(float s){
-  //glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture[2]);   // choose the texture to use.
-  //glColor4f(1,1,1,1.0);
-  glBegin(GL_QUAD_STRIP);
-    vertex_vec v1,v2,res;
-    v1.x = 0.0;
-    v1.y = s;
-    v1.z = 0.0;
-    v2.x = -s;
-    v2.y = 0.0;
-    v2.z = 0.0;
-    res = CalcNormal(v1,v2);
-    glNormal3d(res.x,res.y,res.z);
-    //glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0.0,s,0.0);
-    //glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0.0,0.0,0.0);
-    //glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(s,s,0.0);
-    //glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(s,0.0,0.0);
-     
-
-  
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(s,s,-s);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(s,0.0,-s);
-    
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(0.0,s,-s);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(0.0,0.0,-s);
-    
-    //glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0.0,s,0.0);
-    //glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0.0,0.0,0.0);
-  glEnd();
-
-  glBindTexture(GL_TEXTURE_2D, texture[2]);   // choose the texture to use.
-  glBegin(GL_QUAD_STRIP);
-    v1.x = -s;
-    v1.y = 0.0;
-    v1.z = 0.0;
-    v2.x = 0.0;
-    v2.y = 0.0;
-    v2.z = s;
-    res = CalcNormal(v1,v2);
-    glNormal3d(res.x,res.y,res.z);
-    glTexCoord2f(0,1);
-    glVertex3f(0.0,s,0.0);
-    glTexCoord2f(1,1);
-    glVertex3f(s,s,0.0);
-    glTexCoord2f(0,0);
-    glVertex3f(0,s,-s);
-  glTexCoord2f(1,0);
-    glVertex3f(s,s,-s);
-  glEnd();
-
-  glBegin(GL_QUAD_STRIP);
-    v1.x = -s;
-    v1.y = 0.0;
-    v1.z = 0.0;
-    v2.x = 0.0;
-    v2.y = 0.0;
-    v2.z = s;
-    res = CalcNormal(v1,v2);
-    glNormal3d(res.x,res.y,res.z);
-    glTexCoord2f(0,1);
-    glVertex3f(0.0,0.0,0.0);
-    glTexCoord2f(1,1);
-    glVertex3f(s,0.0,0.0);
-    glTexCoord2f(0,0);
-    glVertex3f(0.0,0.0,-s);
-    glTexCoord2f(1,0);
-    glVertex3f(s,0.0,-s);
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-  
+  DrawCube(s);
 }
 
 
@@ -929,10 +850,10 @@ void transformer::DrawTransformer(){
       glPushMatrix();
         glPushMatrix();
           glScalef(0.1,0.1,3);
-          glCallList(legs);
+        glCallList(legs);
         glPopMatrix();
         glTranslatef(-0.05,-0.05,-0.3);
-          glScalef(0.3,0.3,0.3);
+        glScalef(0.3,0.3,0.3);
         glCallList(bomb);
       glPopMatrix();
         GLfloat  lightPos[] = { 0.0f, 0.0f, 0.2f, 1.0f };
