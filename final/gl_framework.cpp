@@ -244,6 +244,20 @@ namespace csX75
       else translate_blades = translate_blades + 0.01;
     }
     
+    if (key == GLFW_KEY_EQUAL && action == GLFW_PRESS){
+      if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
+        rotate_blades = rotate_blades - 5;
+      }
+      else rotate_blades = rotate_blades + 5;
+    }
+    
+    if (key == GLFW_KEY_SEMICOLON && action == GLFW_PRESS){
+      if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
+        rotate_split = rotate_split - 5;
+      }
+      else rotate_split = rotate_split + 5;
+    }
+    
     if (key == GLFW_KEY_Z && action == GLFW_PRESS){
       if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
         torso_move_z = torso_move_z - 0.03;
@@ -331,9 +345,9 @@ namespace csX75
         rotate_lr_hand = 0;
         rotate_ul_hand = 75;
         rotate_ll_hand = 0;
-        rotate_split = 0;
-        translate_blades = 0;
-        rotate_blades = 0;
+        //rotate_split = 0;
+        //translate_blades = 0;
+        //rotate_blades = 0;
         gun_rotate = 0;
         rotate_stand_bottom = 0;
         translate_stand_bottom = 0;
@@ -358,9 +372,9 @@ namespace csX75
         rotate_lr_hand = 26*5;
         rotate_ul_hand = 9*5;
         rotate_ll_hand =  - 26*5;
-        rotate_split =  14*5;
-        translate_blades = 20*0.01;
-        rotate_blades = 18*5;
+        //rotate_split =  14*5;
+        //translate_blades = 20*0.01;
+        //rotate_blades = 18*5;
         gun_rotate = 26*0.01;
         rotate_stand_bottom = 15*5;
         translate_stand_bottom =8*0.01;

@@ -1,25 +1,10 @@
--------------Changes---------- Vibhor ------------------
-Added a single building and ground.
-Rotation angle of blades changed.
-Changed the near and far plane of frustrum. So now even "driver's view" looks awesome B|
--------------------------------
+CS 475/675 Computer Graphics : Final Assignment
 
-changes - Vibhor
+Submitted By : Vibhor Kanojia (110050036) and Anand Soni (110050037)
 
-Reduced the size of back blades. Back blades ko rotate karne mein pain hoga. :P
-
-Added random collection of buildings.
-Added extra camera.
-
-Caution FPS is set to 120. Make it 30 before using.
-THis was done to make the transformation smoother. Press 8 to see the animation.
-
--------------------------
+Link to YouTube video :
 
 
-change - vibhor
+Link to HTML report :
+http://www.cse.iitb.ac.in/~anandsoni/CS475/A3.html
 
-Added ocean; changed the background; added bomb, texture on head; reduced size of the transformer.
-Now we just have to create the animation properly.
-
--------------------------
