@@ -8,3 +8,59 @@ Link to YouTube video :
 Link to HTML report :
 http://www.cse.iitb.ac.in/~anandsoni/CS475/A3.html
 
+New Controls Added :
+To go into record mode and record parameters for frames: Press 0
+To go into playback mode : Press 8
+To change camera views : Press 9
+
+Robot Orientation :
+Right Arrow : Tilt transformer right
+Left Arrow : Tilt left
+Up arrow : Move ahead
+Down arrow : Move back
+6 : Tilt Down (Towards ground)
+7 : Tilt up
+
+
+Old Controls :
+
+Head :
+I : Translate head along y-axis
+
+
+Right Leg :
+S, Ctrl+S : Move right leg (complete) about z-axis (outward to the plane)
+P, Ctrl+P : Rotate about x-axis
+D, Ctrl+D : Translate right leg along x axis 
+G, Ctrl+G : Rotate lower leg about z axis
+
+Left Leg :
+A, Ctrl+A : Move left leg (complete) about z-axis (outward to the plane)
+O, Ctrl+O : Rotate about x-axis
+D, Ctrl+D : Translate left leg along x axis
+H, Ctrl+H : Rotate lower leg about z axis
+
+Right Hand :
+Q, Ctrl+Q : Translate along the y-axis
+Z, Ctrl+Z : Translate parts of lower hand to form missiles
+E, Ctrl+E : Rotate about z-axis
+X, Ctrl+X : Rotate about y-axis
+N, Ctrl+N : Rotate about x-axis
+R, Ctrl+R : Rotate lower hand about z-axis
+
+Left Hand :
+W, Ctrl+W : Translate along the y-axis
+Y, Ctrl+Y : Rotate about z-axis
+2, Ctrl+2 : Rotate about y-axis
+1, Ctrl+1 : Rotate about x-axis
+U, Ctrl+U : Rotate lower hand about z-axis
+
+Blades :
+=, Ctrl+= : Rotate blades about y-axis
+K, Ctrl+K : Translate blades out of the body (along y axis)
+;, Ctrl+; : Split and open blades
+
+
+Disclaimer :
+The functions used to load images for texture and form the pixel array were taken directly from (with small modifications) :
+http://nehe.gamedev.net/tutorial/texture_mapping/12038/
